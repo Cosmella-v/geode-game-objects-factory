@@ -252,7 +252,6 @@ auto func(auto par = def) { mem = par; return this; }
 
         if (!factory) {
             factory = Manager::create();
-            factory->m_implID = geode::getMod()->getID();
             factory->setID("object-factory-manager");
             gamePresistNode->addChild(factory);
             //geode::SceneManager::get()->keepAcrossScenes(gamePresistNode);
