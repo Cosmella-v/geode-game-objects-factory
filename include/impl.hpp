@@ -59,7 +59,11 @@ class $modify(MenuLayerObjectFactoryExt, MenuLayer) {
         return MenuLayer::init();
     };
 };
-$on_mod(Loaded) { ALREADY_HAVE_GOF_IMPL = GameObjectsFactory::getFactoryManager()->m_implID != getMod()->getID(); }
+$on_mod(Loaded) {
+    auto factory = GameObjectsFactory::getFactoryManager();
+    factory->m_implID = factory->m_implID.empty() ? geode::getMod()->getID() : factory->m_implID;
+    ALREADY_HAVE_GOF_IMPL = factory->m_implID != getMod()->getID(); 
+}
 
 inline static auto exchangeCustomObjectIDs(
     GameObject* object, CCArray* objects = nullptr,
