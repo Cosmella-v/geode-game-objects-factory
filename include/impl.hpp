@@ -123,9 +123,14 @@ class $modify(GJBaseGameLayerFactoryExt, GJBaseGameLayer) {
 class $modify(EnhancedGameObjectFactoryExt, EnhancedGameObject) {
     void activatedByPlayer(PlayerObject * p0) {
         if (ALREADY_HAVE_GOF_IMPL) return EnhancedGameObject::activatedByPlayer(p0);
-
+        THIS_CONF;
+        if (config) if (config->m_activatedByPlayerBypass) goto Act;
         EnhancedGameObject::activatedByPlayer(p0);
-        if (THIS_CONF) if (auto fn = config->m_activatedByPlayer) fn(this, p0);
+        if (config) { 
+            goto Act;
+            Act:
+                if (auto fn = config->m_activatedByPlayer) fn(this, p0);
+        }
     }
 };
 
