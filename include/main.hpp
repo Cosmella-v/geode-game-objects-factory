@@ -163,6 +163,7 @@ namespace GameObjectsFactory {
         int m_createTabBar = 0;             // Create buttons bar
         int m_tabBarInsertIndex = -1;       // Tab bar insert place (-1 = add at end)
         int m_createBtnBg = 4;              // BG for create button of this object
+        bool m_activatedByPlayerBypass = false; // override activate without a og call
 
         CREATE_FUNC(GameObjectConfig);
 
@@ -175,13 +176,15 @@ auto func(auto par = ((GameObjectConfig*)nullptr)->mem) { mem = par; return this
         ___582923_param_set_func_GameObjectsFactory(tab, m_createTabBar);               // Create buttons bar
         ___582923_param_set_func_GameObjectsFactory(insertIndex, m_tabBarInsertIndex);  // Tab bar insert place (-1 = add at end)
         ___582923_param_set_func_GameObjectsFactory(btnBG, m_createBtnBg);              // BG for create button of this object
-
+        ___582923_param_set_func_GameObjectsFactory(SetActivatedByPlayerBypass, m_activatedByPlayerBypass);
 #define ___582923_callback_set_func_GameObjectsFactory(func, def, mem) \
 auto func(auto par = def) { mem = par; return this; }
 
         ___582923_callback_set_func_GameObjectsFactory(customSetup, [](void*) {}, m_customSetup);
         ___582923_callback_set_func_GameObjectsFactory(resetObject, [](void*) {}, m_resetObject);
         ___582923_callback_set_func_GameObjectsFactory(activatedByPlayer, [](void*, void*) {}, m_activatedByPlayer);
+
+        
         ___582923_callback_set_func_GameObjectsFactory(triggerActivated, [](void*, float) {}, m_triggerActivated);
         ___582923_callback_set_func_GameObjectsFactory(triggerObject, [](void*, void*, int, gd::vector<int> const*) {}, m_triggerObject);
         ___582923_callback_set_func_GameObjectsFactory(editPopupSetup, [](void*, void*, void*) {}, m_editPopupSetup);
